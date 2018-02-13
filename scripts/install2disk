@@ -80,7 +80,7 @@ case ${PACKER_BUILDER_TYPE} in
         cat >vagrant.yml<<EOF
 #cloud-config
 ssh_authorized_keys:
-  - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA6NF8iallvQVp22WDkTkyrtvp9eWW6A8YVr+kz4TjGYe7gHzIw+niNltGEFHzD8+v1I2YJ6oXevct1YeS0o9HZyN1Q9qgCgzUFtdOKLv6IedplqoPkcmF0aYet2PkEDo3MlTBckFXPITAMzF8dJSIFo9D8HfdOV0IAdx4O7PtixWKn5y2hMNG0zQPyUecp4pzC6kivAIhyfHilFR61RGL+GPXQ2MWZWFYbAGjyiYJnAmCP3NOTd0jMZEnDkbUvxhMmBYSdETk1rRgm+R4LOzFUGaHqHDLKLX+FIPKcF96hrucXzcWyLbIbEgE98OHlnVYCzRdK8jlqm8tehUc9c9WhQ== vagrant insecure public key
+  - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDQtYmH8jlVf4rH3G/N00pdoW/G8WMVBK+HLfNmJ8k3mPQ7rp0y47j0AoT8Jv2VN60LB9CrH1asCCJaO2qK73bHbLpdZW5Hpu1+oQeB2yimvVJkNti/OlppY2RFXCadFkjYpaBKZbCmS1JOPLa5VLtSNra6y/uN88OqtaDVcCq5/egqwafEpqlhd9zGOxeTYZQ9gdYCcdZvjK9ja0A+zk3Ou7/2KKW6kdGtgbN2MdPA6PATFIPzmLuMax5n8CG41xNWAfcsjj+xsiZN8LwWb6LTwMDyjTY9kZyR06j2FLaxaMlvx9Jivki60muxzjjyWJ4wI1OEAmuPZ8GY7SHz9Wrr vagrant insecure public key
 EOF
         sudo ros install -d /dev/sda -f -c ./vagrant.yml --no-reboot
         ;;

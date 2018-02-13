@@ -1,9 +1,7 @@
 {
     "variables": {
         "version": "{{env `RANCHEROS_VERSION`}}",
-        "atlas_token": "{{env `ATLAS_CLOUD_TOKEN`}}",
-        "iso_checksum": "{{env `RANCHEROS_MD5_ISO_CHECKSUM`}}",
-        "no_release": "{{env `VAGRANT_NO_RELEASE`}}"
+        "iso_checksum": "{{env `RANCHEROS_MD5_ISO_CHECKSUM`}}"
     },
     "builders": [
         {
@@ -26,12 +24,25 @@
                 ["storagectl", "{{.Name}}", "--name", "SATA Controller", "--portcount", "2"],
                 ["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove" ]
             ],
-            "boot_wait": "15s",
+            "boot_wait": "45s",
             "hard_drive_interface": "sata",
             "ssh_username": "rancher",
             "ssh_password": "rancher",
-            "ssh_wait_timeout": "60s",
-            "guest_additions_mode": "disable"
+            "ssh_private_key_file": "/Users/z13724/.ssh/id_rsa",
+            "ssh_port": 22,
+            "ssh_timeout": "60m",
+            "guest_additions_mode": "disable",
+            "shutdown_command": "sudo shutdown now",
+            "boot_command": [
+              "sudo su<enter>",
+              "echo 'Host *' >> /etc/ssh/ssh_config<enter>",
+              "echo '  PasswordAuthentication yes' >> /etc/ssh/ssh_config<enter>",
+              "kill -HUP `ps aux | grep \"/usr/sbin/sshd\" | grep -v grep | awk '{ print $1 }'`<enter>",
+              "passwd rancher<enter>",
+              "rancher<enter>",
+              "rancher<enter>",
+              "exit<enter>"
+            ]
         }
     ],
     "provisioners": [
@@ -46,13 +57,6 @@
             "type": "vagrant",
             "output": "./output/vagrant/x86_64/prod/{{user `version`}}/rancheros_{{.Provider}}.box",
             "vagrantfile_template": "includes/vagrantfile.tpl"
-        },
-        {
-            "type": "vagrant-cloud",
-            "box_tag": "rancherio/rancheros",
-            "access_token": "{{user `atlas_token`}}",
-            "no_release": "{{user `no_release`}}",
-            "version": "{{user `version`}}"
         }]
     ]
 }
