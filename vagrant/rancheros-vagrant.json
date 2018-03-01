@@ -24,6 +24,7 @@
                 ["storagectl", "{{.Name}}", "--name", "SATA Controller", "--portcount", "2"],
                 ["storagectl", "{{.Name}}", "--name", "IDE Controller", "--remove" ]
             ],
+            "post_shutdown_delay": "2m",
             "boot_wait": "45s",
             "hard_drive_interface": "sata",
             "ssh_username": "rancher",
